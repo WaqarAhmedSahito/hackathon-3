@@ -6,7 +6,7 @@ export interface Product {
     color: string;
     description: string;
     price: string;
-    image? :{
+    image :{
         asset: {
             _ref : string;
             _type: "image";

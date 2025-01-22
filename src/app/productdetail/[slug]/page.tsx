@@ -71,7 +71,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   const handleAddToCart = () => {
     addItem({
       id: product.id,
-      image: product.image ? urlFor(product.image).url() : '',
+      image: urlFor(product.image).url(),
       productName: product.productName,
       detail: product.description,
       quantity: 1,
