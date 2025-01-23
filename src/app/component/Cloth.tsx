@@ -55,7 +55,7 @@ export default function Cloth() {
                     <div ref={scrollLeftRef} className="overflow-x-auto no-scrollbar flex scrollbar-hidden">
                         <div className="flex">
 
-                            <Card category="" layout="horizontal" />
+                        <Card category="Men's Shoes" price="" layout="horizontal" />
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@ export default function Cloth() {
                     <div ref={scrollRightRef} className="overflow-x-auto no-scrollbar flex scrollbar-hidden">
                         <div className="flex">
 
-                            <Card category="" layout="horizontal"/>
+                        <Card category="Women's Shoes" layout="horizontal" price="" />
                         </div>
                     </div>
                 </div>
