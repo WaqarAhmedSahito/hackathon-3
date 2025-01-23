@@ -4,14 +4,17 @@ import { useCart } from "../Context/CartContex";
 import Link from "next/link";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
+import { urlFor } from "@/sanity/lib/image";
 
 export default function Bag() {
-  const { items, removeItem, updateQuantity } = useCart();
+  const { cart, updateQuantity, removeFromCart } = useCart();
   
-  const subtotal = items.reduce((total, item) => {
-    const price = parseFloat(item.price.replace(/[^0-9.]/g, ''));
-    return total + (price * item.quantity);
-  }, 0);
+  const calculateTotal = () =>
+    cart.reduce((total, item) => total + Number(item.price) * Number(item.quantity), 0);
+
+  const subtotal = calculateTotal();
+
+ 
 
   return (
     <div>
@@ -31,59 +34,59 @@ export default function Bag() {
         </div>
         <h1 className="text-[18px] font-medium ml-2 mt-2">Bag</h1>
         <div>
-          {items.map((product) => (
+            {cart.map((product) => (
             <div
               key={product.id}
               className="flex justify-between items-center p-2 border-b border-gray-100"
             >
               <Image
-                src={product.image}
-                alt={product.productName}
-                width={70}
-                height={70}
-                className="w-[70px] h-[70px]"
+              src={urlFor(product.image).url()}
+              alt={product.productName}
+              width={70}
+              height={70}
+              className="w-16 h-16"
               />
               <div className="flex-1 ml-4">
-                <h3 className="text-[14px] font-semibold">{product.productName}</h3>
-                <p className="text-[12px] text-[#757575]">{product.detail}</p>                
-                {/* Quantity Controls */}
-                <div className="flex items-center gap-4 mt-2">
-                  <div className="flex items-center gap-2">
-                    <button 
-                      onClick={() => updateQuantity(product.id, 'decrease')}
-                      className="hover:opacity-80"
-                    >
-            
-                    </button>
-                    <span className="text-[14px] font-medium w-6 text-center">
-                      {product.quantity}
-                    </span>
-                    <button 
-                      onClick={() => updateQuantity(product.id, 'increase')}
-                      className="hover:opacity-80"
-                    >
-             
-                    </button>
-                  </div>
-                  
-                  <div className="flex items-center gap-2">
-                    <Image
-                      src="/like-1.png"
-                      alt="like"
-                      className="w-6 h-6 cursor-pointer hover:opacity-80"
-                    />
-                    <Image
-                      src="/delete.png"
-                      alt="delete"
-                      className="w-4 h-4 cursor-pointer hover:opacity-80"
-                      onClick={() => removeItem(product.id)}
-                    />
-                  </div>
+              <h3 className="text-sm font-semibold">{product.productName}</h3>
+                      
+              {/* Quantity Controls */}
+              <div className="flex items-center gap-4 mt-2">
+                <div className="flex items-center gap-2">
+                <button 
+                  onClick={() => updateQuantity(product.id, product.quantity - 1)}
+                  className="hover:opacity-80"
+                >
+                  -
+                </button>
+                <span className="text-sm font-medium w-6 text-center">
+                  {product.quantity}
+                </span>
+                <button 
+                  onClick={() => updateQuantity(product.id, product.quantity + 1)}
+                  className="hover:opacity-80"
+                >
+                  +
+                </button>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                <img
+                  src="/heart-1.png"
+                  alt="like"
+                  className="w-6 h-6 cursor-pointer hover:opacity-80"
+                />
+                <img
+                  src="/delete.png"
+                  alt="delete"
+                  className="w-4 h-4 cursor-pointer hover:opacity-80"
+                  onClick={() => removeFromCart(product.id)}
+                />
                 </div>
               </div>
-              <p className="text-[12px] mb-[21%] sm:mb-[12%]">{product.price}</p>
+              </div>
+              <p className="text-xs mb-6 sm:mb-4">{product.price}</p>
             </div>
-          ))}
+            ))}
         </div>
       </div>
 
@@ -106,12 +109,18 @@ export default function Bag() {
           <p className="text-[14px]">Total</p>
           <p className="text-[14px] font-medium">₹ {subtotal.toFixed(2)}</p>
         </div>
-        <div className="bg-black w-[160px] h-[40px] rounded-full flex justify-center items-center p-4 mt-6 ml-[28%] sm:ml-[38%] lg:ml-[28%] xl:ml-[32%]">
-          <Link href={`/Checkout`}><button className="text-white text-[14px] font-medium">
-            Member Checkout
-          </button></Link>
-        </div>
-      </div>
+        <div className="flex flex-col items-center gap-4 mt-6">
+          <Link href={`/productdetail`}>
+            <button className="bg-black w-[160px] h-[40px] rounded-full text-white text-[14px] font-medium">
+              Continue Shopping
+            </button>
+          </Link>
+          <Link href={`/Checkout`}>
+            <button className="bg-black w-[160px] h-[40px] rounded-full text-white text-[14px] font-medium">
+              Member Checkout
+            </button>
+          </Link>
+        </div></div>
     </div>
     <Footer/>
     </div>

@@ -23,37 +23,36 @@ function InputField({ id = "text", label = "text", type = "text", required = fal
 }
 
 export default function Checkout() {
-  const { items, clearCart } = useCart();
+  const { cart, removeFromCart } = useCart();
   const [isConfirmed, setIsConfirmed] = useState(false);
 
-  const subtotal = items.reduce((total, item) => {
-    const price = parseFloat(item.price.replace(/[^0-9.]/g, ""));
-    return total + price * item.quantity;
-  }, 0);
+  const calculateTotal = () =>
+    cart.reduce((total, item) => total + Number(item.price) * Number(item.quantity), 0);
+
+  const subtotal = calculateTotal();
+
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
    
     console.log("Order submitted:", {
-      items,
+      cart,
       total: subtotal,
     });
     setIsConfirmed(true);
-    clearCart();
+    cart.forEach((item) => removeFromCart(item.id));
   };
 
   const handleConfirmCheckout = () => {
     setIsConfirmed(true);
-    clearCart();
+    cart.forEach((item) => removeFromCart(item.id));
   };
 
   if (isConfirmed) {
     return (
       <div className="flex items-center justify-center min-h-[50vh] mt-6">
         <div className="text-center">
-          <div className="flex flex-col justify-center items-center mb-4">
-            <Image src="/order-success.png" alt="Order Confirmed" width={100} height={100} />
-          </div>
+         
           <h1 className="text-2xl font-bold mb-4">Your order is confirmed!</h1>
           <p className="text-gray-600">Thank you for shopping with us.</p>
           <Link href="/">
@@ -115,7 +114,7 @@ export default function Checkout() {
         {/* Right Section: Bag and Summary */}
         <div className="w-[320px] lg:w-1/3 flex flex-col p-8 rounded-md shadow-sm bg-gray-100">
           <h2 className="text-lg font-bold mb-4">Order Summary</h2>
-          {items.map((item, index) => (
+          {cart.map((item, index) => (
             <div key={index} className="flex items-center mb-4">
               <Image src={item.image} alt={item.productName} width={50} height={50} />
               <div className="ml-4">

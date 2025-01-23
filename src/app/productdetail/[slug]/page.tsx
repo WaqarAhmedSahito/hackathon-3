@@ -50,7 +50,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   }, [slug]);
 
   const router = useRouter();
-  const { addItem } = useCart();
+  const { addToCart } = useCart();
 
   if (loading) {
     return (
@@ -69,13 +69,15 @@ export default function ProductPage({ params }: ProductPageProps) {
   }
 
   const handleAddToCart = () => {
-    addItem({
+    addToCart({
       id: product.id,
       image: urlFor(product.image).url(),
       productName: product.productName,
-      detail: product.description,
+      description: product.description,
       quantity: 1,
       price: product.price,
+      selectedColor: "",
+      selectedSize: ""
     });
     router.push('/Bag');
   };
@@ -106,19 +108,6 @@ export default function ProductPage({ params }: ProductPageProps) {
           <p className="mt-4 text-gray-700">Avaliable: {product.inventory}</p>
           <p className="mt-4 text-gray-700">{product.color}</p>
           <p className="mt-4 text-gray-700">{product.description}</p>
-
-          <div className="mt-6 flex items-center gap-4">
-            <label htmlFor="quantity" className="font-medium">
-              Quantity:
-            </label>
-            <input
-              id="quantity"
-              type="number"
-              min="1"
-              className="w-16 border rounded-md text-center"
-            />
-          </div>
-
           <Button text={"Add to Cart"} classNames={"mt-6 px-6 py-2 rounded-md"} onClick={handleAddToCart} />
         </div>
       </div>
