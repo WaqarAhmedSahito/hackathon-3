@@ -5,17 +5,11 @@ import Link from "next/link";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 import { urlFor } from "@/sanity/lib/image";
-
 export default function Bag() {
   const { cart, updateQuantity, removeFromCart } = useCart();
-  
   const calculateTotal = () =>
     cart.reduce((total, item) => total + Number(item.price) * Number(item.quantity), 0);
-
   const subtotal = calculateTotal();
-
- 
-
   return (
     <div className="min-h-full">
          <Header/>
@@ -37,25 +31,20 @@ export default function Bag() {
             {cart.map((product) => (
             <div
               key={product.id}
-              className="flex justify-between items-center p-2 border-b border-gray-100"
-            >
+              className="flex justify-between items-center p-2 border-b border-gray-100">
               <Image
               src={urlFor(product.image).url()}
               alt={product.productName}
               width={70}
               height={70}
-              className="w-16 h-16"
-              />
+              className="w-16 h-16"/>
               <div className="flex-1 ml-4">
               <h3 className="text-sm font-semibold">{product.productName}</h3>
-                      
-              {/* Quantity Controls */}
               <div className="flex items-center gap-4 mt-2">
                 <div className="flex items-center gap-2">
                 <button 
                   onClick={() => updateQuantity(product.id, product.quantity - 1)}
-                  className="hover:opacity-80"
-                >
+                  className="hover:opacity-80">
                   -
                 </button>
                 <span className="text-sm font-medium w-6 text-center">
@@ -63,24 +52,20 @@ export default function Bag() {
                 </span>
                 <button 
                   onClick={() => updateQuantity(product.id, product.quantity + 1)}
-                  className="hover:opacity-80"
-                >
+                  className="hover:opacity-80">
                   +
                 </button>
                 </div>
-                
                 <div className="flex items-center gap-2">
                 <img
                   src="/heart-1.png"
                   alt="like"
-                  className="w-6 h-6 cursor-pointer hover:opacity-80"
-                />
+                  className="w-6 h-6 cursor-pointer hover:opacity-80"/>
                 <img
                   src="/delete.png"
                   alt="delete"
                   className="w-4 h-4 cursor-pointer hover:opacity-80"
-                  onClick={() => removeFromCart(product.id)}
-                />
+                  onClick={() => removeFromCart(product.id)}/>
                 </div>
               </div>
               </div>
@@ -89,7 +74,6 @@ export default function Bag() {
             ))}
         </div>
       </div>
-
       <div className="bg-white p-4 lg:w-1/3">
         <h1 className="text-[18px] font-medium mt-4 mb-4 text-center lg:text-start lg:ml-10 xl:ml-[20%]">
           Summary

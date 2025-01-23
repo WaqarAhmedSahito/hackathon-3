@@ -4,7 +4,6 @@ import Link from "next/link";
 import Button from "../component/Button";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
-
 export default function page() {
   return (
     <div>

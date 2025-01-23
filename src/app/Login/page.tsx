@@ -4,7 +4,6 @@ import Button from "../component/Button";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 import Image from "next/image";
-
 export default function page() {
     return (
         <div className="min-h-screen flex flex-col">
