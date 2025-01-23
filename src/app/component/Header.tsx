@@ -51,12 +51,12 @@ export default function Header() {
 
         {/* Navigation Links */}
         <ul className="hidden lg:flex space-x-6 text-sm mt-4 lg:mt-0">
-          <li><Link href="#">New & Featured</Link></li>
-          <li><Link href="/all-products">Men</Link></li>
-          <li><Link href="#">Women</Link></li>
-          <li><Link href="#">Kids</Link></li>
-          <li><Link href="#">Sale</Link></li>
-          <li><Link href="#">SNKRS</Link></li>
+          <li><Link href="/productdetail">New & Featured</Link></li>
+          <li><Link href="/productdetail">Men</Link></li>
+          <li><Link href="/productdetail">Women</Link></li>
+          <li><Link href="/productdetail">Kids</Link></li>
+          <li><Link href="/productdetail">Sale</Link></li>
+          <li><Link href="/productdetail">SNKRS</Link></li>
         </ul>
 
         {/* Search and Cart */}
@@ -79,12 +79,12 @@ export default function Header() {
       {isMenuOpen && (
         <div className="lg:hidden mt-4">
           <ul className="flex flex-col space-y-4 bg-[#ffffff] py-4 px-4 border-t">
-            <li><Link href="#">New & Featured</Link></li>
-            <li><Link href="/all-products">Men</Link></li>
-            <li><Link href="#">Women</Link></li>
-            <li><Link href="#">Kids</Link></li>
-            <li><Link href="#">Sale</Link></li>
-            <li><Link href="#">SNKRS</Link></li>
+            <li><Link href="/productdetail">New & Featured</Link></li>
+            <li><Link href="/productdetail">Men</Link></li>
+            <li><Link href="/productdetail">Women</Link></li>
+            <li><Link href="/productdetail">Kids</Link></li>
+            <li><Link href="/productdetail">Sale</Link></li>
+            <li><Link href="/productdetail">SNKRS</Link></li>
           </ul>
         </div>
       )}
