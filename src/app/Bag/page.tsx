@@ -17,7 +17,7 @@ export default function Bag() {
  
 
   return (
-    <div>
+    <div className="min-h-full">
          <Header/>
     <div className="flex flex-col lg:flex-row">
       <div className="flex-1 bg-white p-4 lg:w-2/3">
