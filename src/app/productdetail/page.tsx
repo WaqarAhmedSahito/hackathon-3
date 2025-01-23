@@ -3,7 +3,6 @@ import { useState } from "react";
 import Card from "../component/card";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
-
 export default function Products() {
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [error, setError] = useState<string | null>(null);
@@ -16,20 +15,17 @@ export default function Products() {
                 : [...prev, category]
         );
     };
-
     const isCategorySelected = (category: string) =>
         selectedCategories.includes(category);
 
     const toggleMenu = () => {
         setIsMenuOpen((prev) => !prev);
     };
-
     try {
         return (
             <div>
                 <Header />
                 <div className="flex">
-                    {/* Sidebar */}
                     {isMenuOpen && (
                         <div className="w-1/7 p-4">
                             <div className="space-y-4">
@@ -57,8 +53,7 @@ export default function Products() {
                                                 id="men"
                                                 className="mr-2"
                                                 checked={isCategorySelected("men")}
-                                                onChange={() => handleCategoryChange("men")}
-                                            />
+                                                onChange={() => handleCategoryChange("men")}/>
                                             <label htmlFor="men">Men</label>
                                         </div>
                                         <div className="flex items-center">
@@ -67,8 +62,7 @@ export default function Products() {
                                                 id="women"
                                                 className="mr-2"
                                                 checked={isCategorySelected("women")}
-                                                onChange={() => handleCategoryChange("women")}
-                                            />
+                                                onChange={() => handleCategoryChange("women")}/>
                                             <label htmlFor="women">Women</label>
                                         </div>
                                         <div className="flex items-center">
@@ -77,8 +71,7 @@ export default function Products() {
                                                 id="unisex"
                                                 className="mr-2"
                                                 checked={isCategorySelected("unisex")}
-                                                onChange={() => handleCategoryChange("unisex")}
-                                            />
+                                                onChange={() => handleCategoryChange("unisex")}/>
                                             <label htmlFor="unisex">Unisex</label>
                                         </div>
                                     </div>
@@ -92,8 +85,7 @@ export default function Products() {
                                                 id="boys"
                                                 className="mr-2"
                                                 checked={isCategorySelected("boys")}
-                                                onChange={() => handleCategoryChange("boys")}
-                                            />
+                                                onChange={() => handleCategoryChange("boys")}/>
                                             <label htmlFor="boys">Boys</label>
                                         </div>
                                         <div className="flex items-center">
@@ -102,8 +94,7 @@ export default function Products() {
                                                 id="girls"
                                                 className="mr-2"
                                                 checked={isCategorySelected("girls")}
-                                                onChange={() => handleCategoryChange("girls")}
-                                            />
+                                                onChange={() => handleCategoryChange("girls")}/>
                                             <label htmlFor="girls">Girls</label>
                                         </div>
                                     </div>
@@ -117,8 +108,7 @@ export default function Products() {
                                                 id="under-5000"
                                                 className="mr-2"
                                                 checked={isCategorySelected("under-5000")}
-                                                onChange={() => handleCategoryChange("under-5000")}
-                                            />
+                                                onChange={() => handleCategoryChange("under-5000")}/>
                                             <label htmlFor="under-5000">Under ₹ 5,000</label>
                                         </div>
                                         <div className="flex items-center">
@@ -127,8 +117,7 @@ export default function Products() {
                                                 id="5000-20000"
                                                 className="mr-2"
                                                 checked={isCategorySelected("5000-20000")}
-                                                onChange={() => handleCategoryChange("5000-20000")}
-                                            />
+                                                onChange={() => handleCategoryChange("5000-20000")}/>
                                             <label htmlFor="5000-20000">₹ 5,000-₹ 20,000</label>
                                         </div>
                                     </div>

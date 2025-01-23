@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "../component/Button";
 import { useCart } from "../Context/CartContex";
-
 function InputField({ id = "text", label = "text", type = "text", required = false }) {
   return (
     <div>
@@ -16,25 +15,18 @@ function InputField({ id = "text", label = "text", type = "text", required = fal
         id={id}
         name={id}
         className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-        required={required}
-      />
+        required={required}/>
     </div>
   );
 }
-
 export default function Checkout() {
   const { cart, removeFromCart } = useCart();
   const [isConfirmed, setIsConfirmed] = useState(false);
-
   const calculateTotal = () =>
     cart.reduce((total, item) => total + Number(item.price) * Number(item.quantity), 0);
-
   const subtotal = calculateTotal();
-
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-   
     console.log("Order submitted:", {
       cart,
       total: subtotal,
@@ -42,17 +34,14 @@ export default function Checkout() {
     setIsConfirmed(true);
     cart.forEach((item) => removeFromCart(item.id));
   };
-
   const handleConfirmCheckout = () => {
     setIsConfirmed(true);
     cart.forEach((item) => removeFromCart(item.id));
   };
-
   if (isConfirmed) {
     return (
       <div className="flex items-center justify-center min-h-[50vh] mt-6">
-        <div className="text-center">
-         
+        <div className="text-center"> 
           <h1 className="text-2xl font-bold mb-4">Your order is confirmed!</h1>
           <p className="text-gray-600">Thank you for shopping with us.</p>
           <Link href="/">
@@ -62,7 +51,6 @@ export default function Checkout() {
       </div>
     );
   }
-
   return (
     <div>
       <header className="bg-white p-4">
@@ -93,7 +81,6 @@ export default function Checkout() {
             <Image src="/deliver.png" alt="Delivery Icon" width={24} height={24} className="w-6 h-6 mr-4" />
             <span className="font-medium text-gray-700">Deliver It</span>
           </button>
-
           <div className="space-y-4 mt-12">
             <h2 className="font-bold">Enter Your Name And Address:</h2>
             <InputField id="first_name" label="First Name" required />
@@ -110,8 +97,6 @@ export default function Checkout() {
             <InputField id="country" label="India" />
           </div>
         </div>
-
-        {/* Right Section: Bag and Summary */}
         <div className="w-[320px] lg:w-1/3 flex flex-col p-8 rounded-md shadow-sm bg-gray-100">
           <h2 className="text-lg font-bold mb-4">Order Summary</h2>
           {cart.map((item, index) => (
@@ -130,8 +115,7 @@ export default function Checkout() {
             <p className="font-bold text-sm mt-2">Total: ₹{subtotal.toFixed(2)}</p>
             <button
           onClick={handleConfirmCheckout}
-          className="mt-6 rounded-md p-6 flex justify-center items-center text-center bg-black text-white"
-        >
+          className="mt-6 rounded-md p-6 flex justify-center items-center text-center bg-black text-white">
           Confirm Checkout
         </button>
         {isConfirmed && <p>Checkout confirmed!</p>}

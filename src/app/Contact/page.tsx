@@ -6,8 +6,7 @@ import Footer from "../component/Footer";
 import Image from "next/image";
 export default function page() {
   return (
-    <div>
-        <Header/>
+    <div><Header/>
     <div className="flex flex-col items-center px-10 md:px-0">
         <h2 className="uppercase text-xl font-bold mt-8">Get Help</h2>
         <div className="flex px-4 py-3 rounded-md w-72 lg:w-[30%] border-2 border-text-secondary-gray mt-4 justify-between">

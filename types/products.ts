@@ -1,4 +1,3 @@
-
 export interface Product {
     id: number;
     productName: string;
@@ -17,6 +16,5 @@ export interface Product {
     slug: {
         _type:"slug";
         current: string;
-
     }
 }

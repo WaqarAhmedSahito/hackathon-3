@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
-
 const Footer = () => {
   return (
     <footer className="px-6 lg:px-10 bg-black text-white">

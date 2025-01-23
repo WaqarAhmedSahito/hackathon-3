@@ -9,15 +9,9 @@ import { useRouter } from "next/navigation";
 import Header from "@/app/component/Header";
 import Footer from "@/app/component/Footer";
 import Button from "@/app/component/Button";
-
 interface ProductPageProps {
   params: { slug: string };
 }
-
-
-
-
-
 async function getProduct(slug: string): Promise<Product> {
   return client.fetch(
     groq`*[_type == "product" && slug.current == $slug][0] {
@@ -34,12 +28,10 @@ async function getProduct(slug: string): Promise<Product> {
     { slug }
   );
 }
-
 export default function ProductPage({ params }: ProductPageProps) {
   const { slug } = params;
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     async function fetchProduct() {
       const fetchedProduct = await getProduct(slug);
@@ -48,10 +40,8 @@ export default function ProductPage({ params }: ProductPageProps) {
     }
     fetchProduct();
   }, [slug]);
-
   const router = useRouter();
   const { addToCart } = useCart();
-
   if (loading) {
     return (
       <div className="flex flex-col justify-center items-center h-screen">
@@ -59,7 +49,6 @@ export default function ProductPage({ params }: ProductPageProps) {
       </div>
     );
   }
-
   if (!product) {
     return (
       <div className="flex flex-col justify-center items-center h-screen">
@@ -67,7 +56,6 @@ export default function ProductPage({ params }: ProductPageProps) {
       </div>
     );
   }
-
   const handleAddToCart = () => {
     addToCart({
       id: product.id,
@@ -81,11 +69,6 @@ export default function ProductPage({ params }: ProductPageProps) {
     });
     router.push('/Bag');
   };
-
-
-
-
-
   return (
     <div className=" max-w-full mx-auto">
       <Header />
@@ -97,8 +80,7 @@ export default function ProductPage({ params }: ProductPageProps) {
               <img
                 src={urlFor(product.image).url()}
                 alt={product.productName}
-                className="w-[653px] h-[453px] top-[110px] rounded-md"
-              />
+                className="w-[653px] h-[453px] top-[110px] rounded-md"/>
             )}
           </div>
         </div>

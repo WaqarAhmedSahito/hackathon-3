@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 export default function Hello(){
     return(
         <div className=" justify-between items-center">
@@ -9,7 +8,7 @@ export default function Hello(){
                 </p>
             </div>
             <div className="flex items-center flex-col bg-light-gray  px-10 md:px-0">
-            <img src="/big shoe.png" alt="big shoe"  />
+            <img src="/big shoe.webp" alt="big shoe"  />
             </div>
         </div>
     )
