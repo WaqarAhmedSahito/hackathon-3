@@ -1,9 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../component/Button";
-import { useCart } from "../Context/CartContex";
+import { Product } from "../../../types/products";
+import { getCartItems, removeFromCart } from "../action/action";
+import { urlFor } from "@/sanity/lib/image";
 function InputField({ id = "text", label = "text", type = "text", required = false }) {
   return (
     <div>
@@ -20,23 +22,21 @@ function InputField({ id = "text", label = "text", type = "text", required = fal
   );
 }
 export default function Checkout() {
-  const { cart, removeFromCart } = useCart();
+  const [cartItems, setCartItems] = useState<Product[]>([]);
+  
+
   const [isConfirmed, setIsConfirmed] = useState(false);
+  useEffect(()=> {
+    setCartItems(getCartItems());
+  })
   const calculateTotal = () =>
-    cart.reduce((total, item) => total + Number(item.price) * Number(item.quantity), 0);
+    cartItems.reduce((total, item) => total + item.price * item.inventory, 0);
   const subtotal = calculateTotal();
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Order submitted:", {
-      cart,
-      total: subtotal,
-    });
-    setIsConfirmed(true);
-    cart.forEach((item) => removeFromCart(item.id));
-  };
+
   const handleConfirmCheckout = () => {
     setIsConfirmed(true);
-    cart.forEach((item) => removeFromCart(item.id));
+    cartItems.forEach((item) => removeFromCart(item.id));
+    setCartItems([]); 
   };
   if (isConfirmed) {
     return (
@@ -45,8 +45,7 @@ export default function Checkout() {
           <h1 className="text-2xl font-bold mb-4">Your order is confirmed!</h1>
           <p className="text-gray-600">Thank you for shopping with us.</p>
           <Link href="/">
-            <Button text="Continue Shopping" classNames="mt-4 px-6 py-2" />
-          </Link>
+            <Button text="Continue Shopping" classNames="mt-4 px-6 py-2" /></Link>
         </div>
       </div>
     );
@@ -69,7 +68,11 @@ export default function Checkout() {
           </div>
         </div>
       </header>
-      <form onSubmit={handleSubmit} className="flex flex-col lg:flex-row lg:justify-between lg:space-x-8 px-24 py-6">
+      <form  onSubmit={(e) => {
+          e.preventDefault();
+          handleConfirmCheckout();
+        }}
+         className="flex flex-col lg:flex-row lg:justify-between lg:space-x-8 px-24 py-6">
         {/* Left Section: Delivery and Address Form */}
         <div className="w-full lg:w-2/3 bg-white p-6 rounded-md shadow-sm">
           <h2 className="text-lg font-semibold mb-2">How would you like to get your order?</h2>
@@ -99,12 +102,13 @@ export default function Checkout() {
         </div>
         <div className="w-[320px] lg:w-1/3 flex flex-col p-8 rounded-md shadow-sm bg-gray-100">
           <h2 className="text-lg font-bold mb-4">Order Summary</h2>
-          {cart.map((item, index) => (
+          {cartItems.map((item, index) => (
             <div key={index} className="flex items-center mb-4">
-              <Image src={item.image} alt={item.productName} width={50} height={50} />
+              <Image  src={urlFor(item.image).url()}
+              alt={item.productName} width={50} height={50} />
               <div className="ml-4">
                 <p className="font-medium text-sm">{item.productName}</p>
-                <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
+                <p className="text-sm text-gray-600">Qty: {item.inventory}</p>
                 <p className="text-sm font-bold">{item.price}</p>
               </div>
             </div>
