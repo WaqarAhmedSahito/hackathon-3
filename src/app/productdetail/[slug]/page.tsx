@@ -1,14 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { urlFor } from "@/sanity/lib/image";
 import { Product } from "../../../../types/products";
-import { useCart } from "@/app/Context/CartContex";
 import { groq } from "next-sanity";
 import { client } from "@/sanity/lib/client";
 import { useRouter } from "next/navigation";
 import Header from "@/app/component/Header";
 import Footer from "@/app/component/Footer";
 import Button from "@/app/component/Button";
+import { addToCart } from "@/app/action/action";
 interface ProductPageProps {
   params: { slug: string };
 }
@@ -41,7 +41,7 @@ export default function ProductPage({ params }: ProductPageProps) {
     fetchProduct();
   }, [slug]);
   const router = useRouter();
-  const { addToCart } = useCart();
+
   if (loading) {
     return (
       <div className="flex flex-col justify-center items-center h-screen">
@@ -56,19 +56,16 @@ export default function ProductPage({ params }: ProductPageProps) {
       </div>
     );
   }
-  const handleAddToCart = () => {
-    addToCart({
-      id: product.id,
-      image: urlFor(product.image).url(),
-      productName: product.productName,
-      description: product.description,
-      quantity: 1,
-      price: product.price,
-      selectedColor: "",
-      selectedSize: ""
-    });
+  const handleAddToCart = (e: React.MouseEvent, product :Product) => {
+    e.preventDefault();
+  alert(`${product.productName} added to cart`)
+ 
+    addToCart(product)
     router.push('/Bag');
+   
   };
+
+
   return (
     <div className=" max-w-full mx-auto">
       <Header />
@@ -90,7 +87,9 @@ export default function ProductPage({ params }: ProductPageProps) {
           <p className="mt-4 text-gray-700">Avaliable: {product.inventory}</p>
           <p className="mt-4 text-gray-700">{product.color}</p>
           <p className="mt-4 text-gray-700">{product.description}</p>
-          <Button text={"Add to Cart"} classNames={"mt-6 px-6 py-2 rounded-md"} onClick={handleAddToCart} />
+          <div onClick={(e) => handleAddToCart(e, product)}>
+          <Button text={"Add to Cart"} classNames={"mt-6 px-6 py-2 rounded-md"}  />
+          </div>
         </div>
       </div>
       <Footer />

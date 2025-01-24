@@ -1,10 +1,10 @@
 export interface Product {
-    id: number;
+    id: string;
     productName: string;
-    inventory: string;
+    inventory: number;
     color: string;
     description: string;
-    price: string;
+    price: number;
     image :{
         asset: {
             _ref : string;
