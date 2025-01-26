@@ -6,6 +6,8 @@ import Button from "../component/Button";
 import { Product } from "../../../types/products";
 import { getCartItems, removeFromCart } from "../action/action";
 import { urlFor } from "@/sanity/lib/image";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
 function InputField({ id = "text", label = "text", type = "text", required = false }) {
   return (
     <div>
@@ -28,7 +30,7 @@ export default function Checkout() {
   const [isConfirmed, setIsConfirmed] = useState(false);
   useEffect(()=> {
     setCartItems(getCartItems());
-  })
+  }, []);
   const calculateTotal = () =>
     cartItems.reduce((total, item) => total + item.price * item.inventory, 0);
   const subtotal = calculateTotal();
@@ -40,13 +42,18 @@ export default function Checkout() {
   };
   if (isConfirmed) {
     return (
+      <div >
+        <Header/>
       <div className="flex items-center justify-center min-h-[50vh] mt-6">
         <div className="text-center"> 
           <h1 className="text-2xl font-bold mb-4">Your order is confirmed!</h1>
           <p className="text-gray-600">Thank you for shopping with us.</p>
           <Link href="/">
-            <Button text="Continue Shopping" classNames="mt-4 px-6 py-2" /></Link>
+            <Button  text="Continue Shopping" classNames="mt-4 px-6 py-2" />
+          </Link>
         </div>
+      </div>
+      <Footer/>
       </div>
     );
   }
