@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "../component/Button";
 import { Product } from "../../../types/products";
-import { getCartItems} from "../action/action";
+import { getCartItems, removeFromCart} from "../action/action";
 import { urlFor } from "@/sanity/lib/image";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
@@ -94,7 +94,8 @@ export default  function Checkout() {
           console.error("Error placing order:", error);
         }
        setIsConfirmed(true);
-        
+       cartItems.forEach((item) => removeFromCart(item.productName));
+       setCartItems([]);
       }
   };
 
