@@ -37,7 +37,7 @@ export default function Checkout() {
 
   const handleConfirmCheckout = () => {
     setIsConfirmed(true);
-    cartItems.forEach((item) => removeFromCart(item.id));
+    cartItems.forEach((item) => removeFromCart(item.productName));
     setCartItems([]); 
   };
   if (isConfirmed) {

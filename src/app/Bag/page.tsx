@@ -17,31 +17,31 @@ const CartPage = () => {
     setCartItems(getCartItems());
   }, []);
 
-  const handleRemove = (id: string) => {
+  const handleRemove = (productname: string) => {
     const confirmRemoval = window.confirm("Are you sure you want to remove this item?");
     if (confirmRemoval) {
-      removeFromCart(id);
+      removeFromCart( productname );
       setCartItems(getCartItems());
       alert("Item removed successfully.");
     }
   };
 
-  const handleQuantityChange = (id: string, quantity: number) => {
-    updateCartQuantity(id, quantity);
+  const handleQuantityChange = (id: string,productName:string, quantity: number) => {
+    updateCartQuantity(id, productName, quantity);
     setCartItems(getCartItems());
   };
 
-  const handleIncrement = (id: string) => {
-    const product = cartItems.find((item) => item.id === id);
+  const handleIncrement = (id: string ,productname:string) => {
+    const product = cartItems.find((item) => item.id === id && item.productName === productname);
     if (product) {
-      handleQuantityChange(id, product.inventory + 1);
+      handleQuantityChange(id, product.productName, product.inventory + 1);
     }
   };
 
-  const handleDecrement = (id: string) => {
-    const product = cartItems.find((item) => item.id === id);
+  const handleDecrement = (id: string ,productname:string) => {
+    const product = cartItems.find((item) => item.id === id && item.productName === productname);
     if (product && product.inventory > 1) {
-      handleQuantityChange(id, product.inventory - 1);
+      handleQuantityChange(id, product.productName , product.inventory - 1);
     }
   };
 
@@ -77,7 +77,7 @@ const CartPage = () => {
             {cartItems.length > 0 ? (
               cartItems.map((item) => (
                 <div
-                  key={item.id}
+                  key={`${item.id}-${item.productName}`}
                   className="flex justify-between items-center p-2 border-b border-gray-100"
                 >
                   <Image
@@ -92,14 +92,14 @@ const CartPage = () => {
                     <div className="flex items-center gap-4 mt-2">
                       <button
                         className="bg-gray-200 px-2 py-1 rounded hover:bg-gray-300"
-                        onClick={() => handleDecrement(item.id)}
+                        onClick={() => handleDecrement(item.id,item.productName)}
                       >
                         -
                       </button>
                       <span>{item.inventory}</span>
                       <button
                         className="bg-gray-200 px-2 py-1 rounded hover:bg-gray-300"
-                        onClick={() => handleIncrement(item.id)}
+                        onClick={() => handleIncrement(item.id,item.productName)}
                       >
                         +
                       </button>
@@ -107,7 +107,7 @@ const CartPage = () => {
                         src="/delete.png"
                         alt="delete"
                         className="w-4 h-4 cursor-pointer hover:opacity-80"
-                        onClick={() => handleRemove(item.id)}
+                        onClick={() => handleRemove( item.productName)}
                       />
                     </div>
                   </div>
