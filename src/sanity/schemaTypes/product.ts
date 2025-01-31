@@ -11,7 +11,7 @@ export const productSchema = {
       {
         name: 'id',
         title: 'id',
-        type: 'number',
+        type: 'string',
       },
       {
         name: 'category',
