@@ -5,6 +5,6 @@ export const client = createClient({
   dataset,
   apiVersion,
   useCdn: true,
-  token: "sk2NLCmI4AAeMM3r6s0GFhxckkyFicj9QyTjgcH3NalggVOEeKHwqrd0DSFCFcbUZ1YetKtflexI30wFUqIgnDpS7OD8zA4CfcXz17qiLNKGZjt8bXA1ryXiogWl1HHsXPf5ssBE1GgmXFMgu2PnFA77mua8JriWWTdmKQPKRLNL6ehY07AE",
+  token: process.env.SANITY_API_TOKEN,
 })
 export default client
