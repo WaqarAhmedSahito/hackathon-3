@@ -32,7 +32,7 @@ const Card: React.FC<CardProps> = ({ category, price ,layout = "grid" }) => {
                 : "grid lg:grid-cols-3 sm:grid-cols-1"
         }`}>
             {product.map((product) => (
-                    <div key={product.slug.current} className="min-w-[300px] md:min-w-[350px]  bg-white border rounded-lg shadow-md p-4 cursor-pointer hover:shadow-xl transition m-2">
+                    <div key={product.slug.current} className="w-[280px] md:w-[320px] min-w-[300px] md:min-w-[350px]  bg-white border rounded-lg shadow-md p-4 cursor-pointer hover:shadow-xl transition m-2">
                         <Link href={`/productdetail/${product.slug.current}`}>
                         {product.image && (
                             <img

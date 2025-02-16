@@ -9,7 +9,7 @@ export default function page() {
     <div>
       <Header />
       <div className="flex flex-col items-center py-10 px-4 md:px-0">
-        <Image className="pb-5" src="/nikelogo.png" width={40} height={10} alt="Logo" />
+        <Image className="pb-5 w-10 " src="/nikelogo.png" width={40} height={10} alt="Logo"  />
         <h2 className="uppercase text-center font-bold pb-5">
           BECOME A NIKE MEMBER
         </h2>

@@ -8,15 +8,12 @@ import { useEffect, useState } from "react";
 import { Product } from "../../../types/products";
 import { getCartItems, updateCartQuantity, removeFromCart } from "../action/action";
 import { useRouter } from "next/navigation";
-
 const CartPage = () => {
   const [cartItems, setCartItems] = useState<Product[]>([]);
   const router = useRouter();
-
   useEffect(() => {
     setCartItems(getCartItems());
   }, []);
-
   const handleRemove = (productname: string) => {
     const confirmRemoval = window.confirm("Are you sure you want to remove this item?");
     if (confirmRemoval) {
@@ -25,41 +22,33 @@ const CartPage = () => {
       alert("Item removed successfully.");
     }
   };
-
   const handleQuantityChange = (id: string,productName:string, quantity: number) => {
     updateCartQuantity(id, productName, quantity);
     setCartItems(getCartItems());
   };
-
   const handleIncrement = (id: string ,productname:string) => {
     const product = cartItems.find((item) => item.id === id && item.productName === productname);
     if (product) {
       handleQuantityChange(id, product.productName, product.inventory + 1);
     }
   };
-
   const handleDecrement = (id: string ,productname:string) => {
     const product = cartItems.find((item) => item.id === id && item.productName === productname);
     if (product && product.inventory > 1) {
       handleQuantityChange(id, product.productName , product.inventory - 1);
     }
   };
-
   const calculateTotal = () =>
     cartItems.reduce((total, item) => total + item.price * item.inventory, 0);
-
-  const handleProceed = () => {
+    const handleProceed = () => {
     alert("Proceeding to checkout");
     router.push("/Checkout");
   };
-
   const subtotal = calculateTotal();
-
   return (
     <div className="min-h-full">
-      <Header />
+      <Header/>
       <div className="flex flex-col lg:flex-row">
-        {/* Cart Items Section */}
         <div className="flex-1 bg-white p-4 lg:w-2/3">
           <div className="bg-[#f0f0f0] w-auto mx-2 p-3">
             <p className="text-[13px] font-medium">Free Delivery</p>
@@ -119,8 +108,6 @@ const CartPage = () => {
             )}
           </div>
         </div>
-
-        {/* Summary Section */}
         <div className="bg-white p-4 lg:w-1/3">
           <h1 className="text-[18px] font-medium mt-4 mb-4 text-center lg:text-start lg:ml-10 xl:ml-[20%]">
             Summary
@@ -159,5 +146,4 @@ const CartPage = () => {
     </div>
   );
 };
-
 export default CartPage;

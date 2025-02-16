@@ -8,7 +8,7 @@ export default function Hello(){
                 </p>
             </div>
             <div className="flex items-center flex-col bg-light-gray  px-10 md:px-0">
-            <img src="/big shoe.webp" alt="big shoe"  />
+            <img src="/big shoe.webp" alt="big shoe"/>
             </div>
         </div>
     )

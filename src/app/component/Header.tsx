@@ -28,9 +28,9 @@ export default function Header() {
       </div>
       <div className="flex flex-col md:flex-row justify-between items-center bg-[#ffffff] px-4 md:px-6 lg:px-10 py-4">
         <div className="flex justify-between w-full lg:w-auto">
-          <Link href="/">
-            <img src="/nikelogo.png" alt="Nike Logo" className="h-8" />
-          </Link>
+        <Link href="/">
+    <img src="/nikelogo.png" alt="Nike Logo" className="h-8 w-10" />
+</Link>
           <button
             className="md:hidden px-2 focus:outline-none"
             onClick={toggleMenu}>
@@ -51,6 +51,8 @@ export default function Header() {
             <input
               className="pl-4 focus:outline-none bg-light-gray w-full"
               type="text"
+              name="search"
+              id="search"
               placeholder="Search"/>
           </div>
             <img src="/heart.png" alt="Heart Icon" className="h-6" />

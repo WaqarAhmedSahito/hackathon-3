@@ -40,8 +40,9 @@ const Footer = () => {
                   alt="Twitter icon"
                   width={24}
                   height={24}
-                  className="hover:opacity-75 transition"
+                  className="w-[24px] h-[24px] hover:opacity-75 transition"
                 />
+
               </Link>
             </li>
             <li>
@@ -51,7 +52,7 @@ const Footer = () => {
                   alt="Facebook icon"
                   width={24}
                   height={24}
-                  className="hover:opacity-75 transition"
+                  className="w-[24px] h-[24px]  hover:opacity-75 transition"
                 />
               </Link>
             </li>
@@ -62,7 +63,7 @@ const Footer = () => {
                   alt="Youtube icon"
                   width={24}
                   height={24}
-                  className="hover:opacity-75 transition"
+                  className="hover:opacity-75 transition w-[24px] h-[24px] "
                 />
               </Link>
             </li>
@@ -73,7 +74,7 @@ const Footer = () => {
                   alt="Instagram icon"
                   width={24}
                   height={24}
-                  className="hover:opacity-75 transition"
+                  className="hover:opacity-75 transition w-[24px] h-[24px] "
                 />
               </Link>
             </li>
@@ -82,7 +83,7 @@ const Footer = () => {
       </div>
       <div className="grid grid-cols-12 py-6 gap-4 border-t border-gray-700">
         <div className="col-span-12 lg:col-span-6 flex items-center space-x-4">
-          <Image src="/Loc.png" alt="Location icon" width={20} height={20} />
+          <Image src="/Loc.png" alt="Location icon" width={20} height={20} className="w-[24px] h-[24px] "/>
           <p className="text-white">India</p>
           <p className="text-gray-400">© 2023 Nike, Inc. All Rights Reserved</p>
         </div>

@@ -6,10 +6,42 @@
     text-wrap: balance;
   }
 }
-.no-scrollbar {
-  scrollbar-width: none; /* Firefox */
+
+
+@layer components {
+  .snap-x {
+      scroll-snap-type: x mandatory;
+  }
+  
+  .snap-start {
+      scroll-snap-align: start;
+  }
+  
+  .scrollbar-hidden::-webkit-scrollbar {
+      display: none;
+  }
+  
+  .scrollbar-hidden {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+  }
 }
 
-.no-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+@layer components {
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+
+  .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+  }
+
+  .snap-x {
+      scroll-snap-type: x mandatory;
+  }
+
+  .snap-start {
+      scroll-snap-align: start;
+  }
 }

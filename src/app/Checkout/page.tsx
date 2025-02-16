@@ -9,8 +9,6 @@ import { urlFor } from "@/sanity/lib/image";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 import client from "@/sanity/lib/client";
-
-
 export default  function Checkout() {
   const [cartItems, setCartItems] = useState<Product[]>([]);
   const [formValues, setFormValues] = useState({
@@ -23,8 +21,6 @@ export default  function Checkout() {
     phone: "",
     email: "",
   });
-
-  
   const [formErrors, setFormErrors] = useState({
     firstName: false,
     lastName: false,
@@ -34,14 +30,12 @@ export default  function Checkout() {
     phone: false,
     email: false,
   });
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({
       ...formValues,
       [e.target.id]: e.target.value,
     });
   };
-
   const validateForm = () => {
     const errors = {
       firstName: !formValues.firstName,
@@ -53,20 +47,16 @@ export default  function Checkout() {
       phone: !formValues.phone,
       email: !formValues.email,
     };
-
     setFormErrors(errors);
     return Object.values(errors).every((error) => !error);
   };
-
   const [isConfirmed, setIsConfirmed] = useState(false);
   useEffect(() => {
     setCartItems(getCartItems());
   }, []);
-
   const calculateTotal = () =>
     cartItems.reduce((total, item) => total + item.price * item.inventory, 0);
   const subtotal = calculateTotal();
-
   const handleConfirmCheckout = async () => {
     const orderData = {
       _type: "order",
@@ -84,12 +74,10 @@ export default  function Checkout() {
       total: subtotal,
       orderDate: new Date().toISOString(),
     };
-    
       if (validateForm()) {
         try {
           await client.create(orderData);
           console.log("Order placed successfully!");
-         
         } catch (error) {
           console.error("Error placing order:", error);
         }
@@ -98,7 +86,6 @@ export default  function Checkout() {
        setCartItems([]);
       }
   };
-
   if (isConfirmed) {
     return (
       <div >
@@ -116,7 +103,6 @@ export default  function Checkout() {
       </div>
     );
   }
-
   return (
     <div>
       <header className="bg-white p-4">
@@ -129,8 +115,8 @@ export default  function Checkout() {
           <div className="flex items-center space-x-6">
             <span className="text-sm text-gray-700">000 800 100 9538</span>
             <div className="flex space-x-4">
-              <Image src="/message-icon.png" alt="Message Icon" width={24} height={24} />
-              <Image src="/bag-icon.png" alt="Shopping Cart Icon" width={24} height={24} />
+              <Image src="/message-icon.png" alt="Message Icon" width={24} height={24}  className="rounded-md p-1 hover:scale-110 transition-transform"/>
+              <Image src="/bag-icon.png" alt="Shopping Cart Icon" width={24} height={24}  className="rounded-md p-1 hover:scale-110 transition-transform"/>
             </div>
           </div>
         </div>
@@ -140,7 +126,6 @@ export default  function Checkout() {
         handleConfirmCheckout();
       }}
         className="flex flex-col lg:flex-row lg:justify-between lg:space-x-8 px-24 py-6">
-        {/* Left Section: Delivery and Address Form */}
         <div className="w-full lg:w-2/3 bg-white p-6 rounded-md shadow-sm">
           <h2 className="text-lg font-semibold mb-2">How would you like to get your order?</h2>
           <p className="text-sm text-gray-600 mb-4">
